@@ -355,3 +355,4 @@ MigrationBackup/
 .vscode
 .DS_Store
 appsettings.json
+API/appsettings.json
