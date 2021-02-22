@@ -356,3 +356,4 @@ MigrationBackup/
 .DS_Store
 appsettings.json
 API/appsettings.json
+API/appsettings.json
