@@ -13,11 +13,11 @@ namespace Application.Posts
             public Guid Id { get; set; }
         }
 
-        public class Handle : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
 
-            public Handle(DataContext context)
+            public Handler(DataContext context)
             {
                 _context = context;
             }

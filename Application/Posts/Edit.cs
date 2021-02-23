@@ -14,12 +14,12 @@ namespace Application.Posts
             public Post Post { get; set; }
         }
 
-        public class Handle : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
 
-            public Handle(DataContext context, IMapper mapper)
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
                 _mapper = mapper;
