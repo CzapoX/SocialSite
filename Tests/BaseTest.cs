@@ -10,7 +10,7 @@ namespace Tests
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase("TestDatabase").Options;
             var dbContext = new DataContext(options);
-            
+
             return dbContext;
         }
     }
