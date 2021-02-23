@@ -22,7 +22,7 @@ namespace Application.Posts
                 _context = context;
             }
 
-            async Task<Unit> IRequestHandler<Command, Unit>.Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var postToDelete = await _context.Posts.FindAsync(request.Id);
                 _context.Posts.Remove(postToDelete);

@@ -25,7 +25,7 @@ namespace Application.Posts
                 _mapper = mapper;
             }
 
-            async Task<Unit> IRequestHandler<Command, Unit>.Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var postToEdit =  await _context.Posts.FindAsync(request.Post.Id);
                 _mapper.Map(request.Post, postToEdit);
