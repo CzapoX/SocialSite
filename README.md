@@ -5,7 +5,6 @@ It is a web application API project, that is supposed to be simple social networ
 The application is developed using CQRS + Mediator pattern with Clean Architecture.
 
 ## Technologies
-Backend
 * .NET 5
 * SQL Server
 * Entity Framework Core
