@@ -1,4 +1,6 @@
-﻿using Application.Posts;
+﻿using Application.Core;
+using Application.Posts;
+using AutoMapper;
 using Domain;
 using System;
 using System.Linq;
@@ -10,15 +12,22 @@ namespace Tests.Posts
 {
     public class CreateTest : BaseTest
     {
+        private readonly IMapper _mapper;
+
+        public CreateTest()
+        {
+            var mockMapper = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfiles()); });
+            _mapper = mockMapper.CreateMapper();
+        }
+
         [Fact]
         public async Task ShouldCreateActivity()
         {
             var context = GetDataContext();
-            var sut = new Create.Handler(context);
-            var postToCreate = new Post
+            var sut = new Create.Handler(context, _mapper);
+            var postToCreate = new PostCreateOrEditDto
             {
                 Category = "Animal",
-                CreateDate = DateTime.Today,
                 Description = "Desc",
                 Title = "Title"
             };
@@ -33,7 +42,7 @@ namespace Tests.Posts
             var postInDb = context.Posts.FirstOrDefault(x => x.Category == "Animal");
 
             Assert.NotNull(postInDb);
-            Assert.Equal(postInDb.CreateDate, postToCreate.CreateDate);
+            Assert.NotEqual(postInDb.CreateDate, DateTime.MinValue);
             Assert.Equal(postToCreate.Description, postInDb.Description);
             Assert.NotEqual(postInDb.Id, Guid.Empty);
         }

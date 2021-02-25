@@ -30,7 +30,7 @@ namespace Tests.Posts
             await context.Posts.AddAsync(new Post { Id = id, Title = "Unedited Post" });
             await context.SaveChangesAsync();
 
-            var editedPost = new Post { Id = id, Title = "Edited Post" };
+            var editedPost = new PostCreateOrEditDto { Id = id, Title = "Edited Post" };
 
             var sut = new Edit.Handler(context, _mapper);
 
@@ -40,6 +40,7 @@ namespace Tests.Posts
 
             Assert.NotNull(post);
             Assert.Equal("Edited Post", post.Title);
+            Assert.NotEqual(post.EditDate, DateTime.MinValue);
         }
     }
 }
