@@ -22,7 +22,7 @@ namespace Tests.Posts
             context.SaveChanges();
 
             var sut = new List.Handler(context);
-            var result = sut.Handle(new List.Query(), CancellationToken.None).Result;
+            var result = sut.Handle(new List.Query(), CancellationToken.None).Result.Value;
 
             Assert.NotNull(result);
             Assert.Equal(2, result.Count);

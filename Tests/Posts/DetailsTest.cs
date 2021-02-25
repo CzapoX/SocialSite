@@ -39,7 +39,7 @@ namespace Tests.Posts
 
             var sut = new Details.Handler(context);
 
-            var result = sut.Handle(new Details.Query { Id = firstId }, CancellationToken.None).Result;
+            var result = sut.Handle(new Details.Query { Id = firstId }, CancellationToken.None).Result.Value;
 
             Assert.NotNull(result);
             Assert.Equal(result, postToFind);
