@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -10,9 +11,9 @@ namespace Application.Posts
 {
     public class List
     {
-        public class Query : IRequest<List<Post>> { }
+        public class Query : IRequest<Result<List<Post>>> { }
 
-        public class Handler : IRequestHandler<Query, List<Post>>
+        public class Handler : IRequestHandler<Query, Result<List<Post>>>
         {
             private readonly DataContext _context;
 
@@ -21,9 +22,11 @@ namespace Application.Posts
                 _context = context;
             }
 
-            public async Task<List<Post>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Post>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Posts.ToListAsync();
+                var posts = await _context.Posts.ToListAsync();
+
+                return Result<List<Post>>.Success(posts);
             }
         }
     }

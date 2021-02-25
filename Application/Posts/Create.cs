@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Core;
+using AutoMapper;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -11,7 +12,7 @@ namespace Application.Posts
 {
     public class Create
     {
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             public PostCreateOrEditDto Post { get; set; }
         }
@@ -24,7 +25,7 @@ namespace Application.Posts
             }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -35,14 +36,20 @@ namespace Application.Posts
                 _mapper = mapper;
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 Post postToCreate = _mapper.Map<Post>(request.Post);
                 postToCreate.CreateDate = DateTime.Now;
+                
                 await _context.Posts.AddAsync(postToCreate);
-                await _context.SaveChangesAsync();
+                var result = await _context.SaveChangesAsync() > 0;
 
-                return Unit.Value;
+                if (!result)
+                {
+                    return Result<Unit>.Failure("Failed to create post");
+                }
+
+                return Result<Unit>.Success(Unit.Value);
             }
         }
     }
