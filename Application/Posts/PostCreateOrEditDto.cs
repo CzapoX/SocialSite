@@ -2,7 +2,7 @@
 
 namespace Application.Posts
 {
-    class PostCreateOrEditDto
+    public class PostCreateOrEditDto
     {
         public Guid Id { get; set; }
 

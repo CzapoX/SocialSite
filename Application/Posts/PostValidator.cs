@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Application.Posts
 {
-    public class PostValidator : AbstractValidator<Post>
+    public class PostValidator : AbstractValidator<PostCreateOrEditDto>
     {
         public PostValidator()
         {

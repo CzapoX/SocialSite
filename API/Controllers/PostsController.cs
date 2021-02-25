@@ -22,13 +22,13 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePost([FromBody] Post post)
+        public async Task<IActionResult> CreatePost([FromBody] PostCreateOrEditDto post)
         {
             return Ok(await Mediator.Send(new Create.Command { Post = post }));
         }
 
         [HttpPost("{id}")]
-        public async Task<IActionResult> EditPost(Guid id, Post post)
+        public async Task<IActionResult> EditPost(Guid id, PostCreateOrEditDto post)
         {
             post.Id = id;
             return Ok(await Mediator.Send(new Edit.Command { Post = post }));

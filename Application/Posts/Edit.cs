@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Domain;
 using FluentValidation;
 using MediatR;
 using Persistence;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,7 +12,7 @@ namespace Application.Posts
     {
         public class Command : IRequest
         {
-            public Post Post { get; set; }
+            public PostCreateOrEditDto Post { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -37,6 +37,8 @@ namespace Application.Posts
             {
                 var postToEdit =  await _context.Posts.FindAsync(request.Post.Id);
                 _mapper.Map(request.Post, postToEdit);
+                postToEdit.EditDate = DateTime.Now;
+
                 await _context.SaveChangesAsync();
 
                 return Unit.Value;

@@ -1,7 +1,9 @@
-﻿using Domain;
+﻿using AutoMapper;
+using Domain;
 using FluentValidation;
 using MediatR;
 using Persistence;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +13,7 @@ namespace Application.Posts
     {
         public class Command : IRequest
         {
-            public Post Post { get; set; }
+            public PostCreateOrEditDto Post { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -25,15 +27,19 @@ namespace Application.Posts
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
+            private readonly IMapper _mapper;
 
-            public Handler(DataContext context)
+            public Handler(DataContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                await _context.Posts.AddAsync(request.Post);
+                Post postToCreate = _mapper.Map<Post>(request.Post);
+                postToCreate.CreateDate = DateTime.Now;
+                await _context.Posts.AddAsync(postToCreate);
                 await _context.SaveChangesAsync();
 
                 return Unit.Value;
