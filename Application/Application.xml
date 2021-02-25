@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Application</name>
+    </assembly>
+    <members>
+        <member name="P:Application.Posts.PostCreateOrEditDto.Title">
+            <summary>
+            Post title
+            </summary>
+        </member>
+        <member name="P:Application.Posts.PostCreateOrEditDto.Description">
+            <summary>
+            Post description
+            </summary>
+        </member>
+        <member name="P:Application.Posts.PostCreateOrEditDto.Category">
+            <summary>
+            Post category
+            </summary>
+        </member>
+    </members>
+</doc>

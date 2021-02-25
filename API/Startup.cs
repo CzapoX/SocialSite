@@ -1,15 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +11,8 @@ using MediatR;
 using Application.Posts;
 using Application.Core;
 using FluentValidation.AspNetCore;
+using System.Reflection;
+using System.IO;
 
 namespace API
 {
@@ -44,6 +40,12 @@ namespace API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+                
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                var xmlPath2 = Path.Combine(AppContext.BaseDirectory, "Application.xml");
+                c.IncludeXmlComments(xmlPath);
+                c.IncludeXmlComments(xmlPath2);
             });
 
             services.AddDbContext<DataContext>(opt =>
