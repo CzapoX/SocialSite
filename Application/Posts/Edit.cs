@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 using System.Threading;
@@ -14,6 +15,13 @@ namespace Application.Posts
             public Post Post { get; set; }
         }
 
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Post).SetValidator(new PostValidator());
+            }
+        }
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
