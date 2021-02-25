@@ -49,7 +49,7 @@ namespace API.Controllers
         public async Task<IActionResult> EditPost(Guid id, PostCreateOrEditDto editPost)
         {
             editPost.Id = id;
-            return Ok(await Mediator.Send(new Edit.Command { Post = editPost }));
+            return HandleResult(await Mediator.Send(new Edit.Command { Post = editPost }));
         }
 
         /// <summary>
