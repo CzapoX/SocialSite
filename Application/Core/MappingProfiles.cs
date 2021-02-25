@@ -8,7 +8,6 @@ namespace Application.Core
     {
         public MappingProfiles()
         {
-            CreateMap<Post, Post>();
             CreateMap<PostCreateOrEditDto, Post>();
         }
     }
