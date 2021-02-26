@@ -15,6 +15,7 @@ using System.Reflection;
 using System.IO;
 using Domain;
 using Microsoft.AspNetCore.Identity;
+using API.Services;
 
 namespace API
 {
@@ -38,6 +39,7 @@ namespace API
 
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles));
+            services.AddIdentityCore<AppUser>().AddEntityFrameworkStores<DataContext>().AddSignInManager<SignInManager<AppUser>>();
 
             services.AddSwaggerGen(c =>
             {
@@ -53,7 +55,7 @@ namespace API
             services.AddDbContext<DataContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("SocialSiteContext")));
 
-            services.AddIdentityCore<AppUser>().AddEntityFrameworkStores<DataContext>().AddSignInManager<SignInManager<AppUser>>();
+            services.AddScoped<TokenService>();
 
             services.AddAuthentication();
         }
