@@ -13,6 +13,8 @@ using Application.Core;
 using FluentValidation.AspNetCore;
 using System.Reflection;
 using System.IO;
+using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace API
 {
@@ -40,7 +42,7 @@ namespace API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-                
+
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 var xmlPath2 = Path.Combine(AppContext.BaseDirectory, "Application.xml");
@@ -50,6 +52,10 @@ namespace API
 
             services.AddDbContext<DataContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("SocialSiteContext")));
+
+            services.AddIdentityCore<AppUser>().AddEntityFrameworkStores<DataContext>().AddSignInManager<SignInManager<AppUser>>();
+
+            services.AddAuthentication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
