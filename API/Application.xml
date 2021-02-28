@@ -19,5 +19,42 @@
             Post category
             </summary>
         </member>
+        <member name="P:Application.User.User.Username">
+            <summary>
+            User username
+            </summary>
+        </member>
+        <member name="P:Application.User.User.Token">
+            <summary>
+            User token
+            </summary>
+        </member>
+        <member name="P:Application.User.UserLoginDto.Email">
+             <summary>
+             User email
+             </summary>
+            <example>norbert@test.pl</example>
+        </member>
+        <member name="P:Application.User.UserLoginDto.Password">
+             <summary>
+             User password
+             </summary>
+            <example>!Password1</example>
+        </member>
+        <member name="P:Application.User.UserRegisterDto.UserName">
+            <summary>
+            User name
+            </summary>
+        </member>
+        <member name="P:Application.User.UserRegisterDto.Email">
+            <summary>
+            User email
+            </summary>
+        </member>
+        <member name="P:Application.User.UserRegisterDto.Password">
+            <summary>
+            User password
+            </summary>
+        </member>
     </members>
 </doc>
