@@ -1,5 +1,4 @@
-﻿using Domain;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Application.Posts
 {
@@ -7,9 +6,9 @@ namespace Application.Posts
     {
         public PostValidator()
         {
-            RuleFor(x => x.Title).NotEmpty();
-            RuleFor(x => x.Category).NotEmpty();
-            RuleFor(x => x.Description).NotEmpty();
+            RuleFor(x => x.Title).NotEmpty().WithMessage("Title is required");
+            RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");
+            RuleFor(x => x.Description).NotEmpty().WithMessage("Description is required");
         }
     }
 }
