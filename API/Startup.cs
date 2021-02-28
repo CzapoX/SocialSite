@@ -15,10 +15,10 @@ using System.Reflection;
 using System.IO;
 using Domain;
 using Microsoft.AspNetCore.Identity;
-using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Application.Services;
 
 namespace API
 {
