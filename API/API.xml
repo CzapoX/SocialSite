@@ -39,5 +39,12 @@
             <param name="id" example="330EE2CD-F1DD-40B8-807D-08D8D725D360">Post ID</param>
             <returns></returns>
         </member>
+        <member name="M:API.Controllers.UserController.Login(Application.User.UserLoginDto)">
+            <summary>
+            Logs in existing user
+            </summary>
+            <param name="loginCredentials">User login credentials</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
