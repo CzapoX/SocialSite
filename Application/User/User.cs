@@ -1,6 +1,6 @@
 ﻿namespace Application.User
 {
-    class User
+    public class User
     {
         /// <summary>
         /// User username
