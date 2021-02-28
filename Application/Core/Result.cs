@@ -3,6 +3,7 @@
     public class Result<T>
     {
         public bool IsSuccess { get; set; }
+        public bool IsUnauthorized { get; set; }
         public T Value { get; set; }
         public string Error { get; set; }
 
@@ -20,6 +21,15 @@
             return new Result<T>
             {
                 IsSuccess = false,
+                Error = error
+            };
+        }
+
+        public static Result<T> Unauthorized(string error)
+        {
+            return new Result<T>
+            {
+                IsUnauthorized = true,
                 Error = error
             };
         }
