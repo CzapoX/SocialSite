@@ -1,5 +1,5 @@
 ﻿using Application.Core;
-using Application.Services;
+using Application.Interfaces;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -40,9 +40,9 @@ namespace Application.User
         {
             public DataContext _context;
             public UserManager<AppUser> _userManager;
-            public TokenService _tokenService;
+            public ITokenService _tokenService;
 
-            public Handler(DataContext context, UserManager<AppUser> userManager, TokenService tokenService)
+            public Handler(DataContext context, UserManager<AppUser> userManager, ITokenService tokenService)
             {
                 _context = context;
                 _userManager = userManager;

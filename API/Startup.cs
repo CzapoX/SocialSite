@@ -1,24 +1,25 @@
-using System;
+using Application.Core;
+using Application.Interfaces;
+using Application.Posts;
+using Domain;
+using FluentValidation.AspNetCore;
+using Infrastructure.Security;
+using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Persistence;
-using Microsoft.EntityFrameworkCore;
-using MediatR;
-using Application.Posts;
-using Application.Core;
-using FluentValidation.AspNetCore;
-using System.Reflection;
+using System;
 using System.IO;
-using Domain;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 using System.Text;
-using Application.Services;
 
 namespace API
 {
@@ -58,7 +59,7 @@ namespace API
             services.AddDbContext<DataContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("SocialSiteContext")));
 
-            services.AddScoped<TokenService>();
+            services.AddScoped<ITokenService, TokenService>();
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

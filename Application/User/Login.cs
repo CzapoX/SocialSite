@@ -1,5 +1,5 @@
 ﻿using Application.Core;
-using Application.Services;
+using Application.Interfaces;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -33,9 +33,9 @@ namespace Application.User
         {
             private readonly UserManager<AppUser> _userManager;
             private readonly SignInManager<AppUser> _signInManager;
-            private readonly TokenService _tokenService;
+            private readonly ITokenService _tokenService;
 
-            public Handler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, TokenService tokenService)
+            public Handler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService)
             {
                 _userManager = userManager;
                 _signInManager = signInManager;
