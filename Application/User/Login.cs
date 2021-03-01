@@ -13,18 +13,18 @@ namespace Application.User
     {
         public class Query : IRequest<Result<User>>
         {
-            public UserLoginDto UserLogin { get; set; }
+            public UserLoginDto loginCredentials { get; set; }
         }
 
-        public class CommandValidator : AbstractValidator<Query>
+        public class QueryValidator : AbstractValidator<Query>
         {
-            public CommandValidator()
+            public QueryValidator()
             {
-                RuleFor(x => x.UserLogin.Email)
+                RuleFor(x => x.loginCredentials.Email)
                     .NotEmpty().WithMessage("Email can't be empty")
                     .EmailAddress().WithMessage("A valid email address is required.");
 
-                RuleFor(x => x.UserLogin.Password)
+                RuleFor(x => x.loginCredentials.Password)
                     .NotEmpty().WithMessage("Password can't be empty");
             }
         }
@@ -44,12 +44,12 @@ namespace Application.User
 
             public async Task<Result<User>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var user = await _userManager.FindByEmailAsync(request.UserLogin.Email);
+                var user = await _userManager.FindByEmailAsync(request.loginCredentials.Email);
 
                 if (user == null)
-                    return Result<User>.Unauthorized($"Invalid email: {request.UserLogin.Email}");
+                    return Result<User>.Unauthorized($"Invalid email: {request.loginCredentials.Email}");
 
-                var result = await _signInManager.CheckPasswordSignInAsync(user, request.UserLogin.Password, false);
+                var result = await _signInManager.CheckPasswordSignInAsync(user, request.loginCredentials.Password, false);
 
                 if (result.Succeeded)
                 {

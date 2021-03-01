@@ -14,7 +14,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(UserLoginDto loginCredentials)
         {
-            return HandleResult(await Mediator.Send(new Login.Query { UserLogin = loginCredentials }));
+            return HandleResult(await Mediator.Send(new Login.Query { loginCredentials = loginCredentials }));
         }
     }
 }
