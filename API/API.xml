@@ -46,5 +46,12 @@
             <param name="loginCredentials">User login credentials</param>
             <returns></returns>
         </member>
+        <member name="M:API.Controllers.UserController.Register(Application.User.UserRegisterDto)">
+            <summary>
+            Adds new user to db and logs him in
+            </summary>
+            <param name="registerCredentials"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

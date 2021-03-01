@@ -16,5 +16,16 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Login.Query { loginCredentials = loginCredentials }));
         }
+
+        /// <summary>
+        /// Adds new user to db and logs him in
+        /// </summary>
+        /// <param name="registerCredentials"></param>
+        /// <returns></returns>
+        [HttpPost("register")]
+        public async Task<ActionResult<User>> Register(UserRegisterDto registerCredentials)
+        {
+            return HandleResult(await Mediator.Send(new Register.Command { RegisterCredentials = registerCredentials }));
+        }
     }
 }

@@ -45,16 +45,19 @@
             <summary>
             User name
             </summary>
+            <example>tester</example>
         </member>
         <member name="P:Application.User.UserRegisterDto.Email">
             <summary>
             User email
             </summary>
+            <example>test@test.pl</example>
         </member>
         <member name="P:Application.User.UserRegisterDto.Password">
-            <summary>
-            User password
-            </summary>
+             <summary>
+             User password
+             </summary>
+            <example>!Password1</example>
         </member>
     </members>
 </doc>
