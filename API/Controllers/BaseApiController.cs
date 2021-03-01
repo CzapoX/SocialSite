@@ -19,6 +19,8 @@ namespace API.Controllers
             if (result == null) return NotFound();
             if (result.IsUnauthorized)
                 return Unauthorized(result.Error);
+            if (result.IsBadRequest)
+                return BadRequest(result.Error);
             if (result.IsSuccess && result.Value != null)
                 return Ok(result.Value);
             if (result.IsSuccess && result.Value == null)
