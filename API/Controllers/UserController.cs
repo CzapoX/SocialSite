@@ -12,6 +12,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="loginCredentials">User login credentials</param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<User>> Login(UserLoginDto loginCredentials)
         {
@@ -23,6 +24,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="registerCredentials"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserRegisterDto registerCredentials)
         {
@@ -33,7 +35,6 @@ namespace API.Controllers
         /// Returns loged in user
         /// </summary>
         /// <returns></returns>
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<User>> GetCurrentUser()
         {
