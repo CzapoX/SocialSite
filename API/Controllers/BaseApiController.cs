@@ -17,15 +17,23 @@ namespace API.Controllers
         protected ActionResult HandleResult<T>(Result<T> result)
         {
             if (result == null) return NotFound();
-            if (result.IsUnauthorized)
-                return Unauthorized(result.Error);
-            if (result.IsBadRequest)
-                return BadRequest(result.Error);
-            if (result.IsSuccess && result.Value != null)
-                return Ok(result.Value);
-            if (result.IsSuccess && result.Value == null)
-                return NotFound();
-            return BadRequest();
+            
+            switch(result.ResultStatus)
+            {
+                case ResultStatus.IsUnauthorized:
+                    return Unauthorized(result.Error);
+
+                case ResultStatus.IsSuccess:
+                    if (result.Value == null)
+                        return NotFound();
+                    else
+                        return Ok(result.Value);
+
+                case ResultStatus.Error:
+                    return BadRequest(result.Error);
+                default:
+                    return BadRequest();
+            }
         }
     }
 }

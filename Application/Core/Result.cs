@@ -2,17 +2,15 @@
 {
     public class Result<T>
     {
-        public bool IsSuccess { get; set; }
-        public bool IsUnauthorized { get; set; }
         public T Value { get; set; }
         public string Error { get; set; }
-        public bool IsBadRequest { get; set; }
+        public ResultStatus ResultStatus { get; set; }
 
         public static Result<T> Success(T value)
         {
             return new Result<T>
             {
-                IsSuccess = true,
+                ResultStatus = ResultStatus.IsSuccess,
                 Value = value
             };
         }
@@ -21,7 +19,7 @@
         {
             return new Result<T>
             {
-                IsSuccess = false,
+                ResultStatus = ResultStatus.Error,
                 Error = error
             };
         }
@@ -30,18 +28,16 @@
         {
             return new Result<T>
             {
-                IsUnauthorized = true,
+                ResultStatus = ResultStatus.IsUnauthorized,
                 Error = error
             };
         }
+    }
 
-        public static Result<T> BadRequest(string error)
-        {
-            return new Result<T>
-            {
-                IsBadRequest = true,
-                Error = error
-            };
-        }
+    public enum ResultStatus
+    {
+        IsSuccess,
+        Error,
+        IsUnauthorized,
     }
 }

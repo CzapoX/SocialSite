@@ -52,10 +52,10 @@ namespace Application.User
             public async Task<Result<User>> Handle(Command request, CancellationToken cancellationToken)
             {
                 if (await _context.Users.AnyAsync(x => x.Email == request.RegisterCredentials.Email))
-                    return Result<User>.BadRequest("Email already exists");
+                    return Result<User>.Failure("Email already exists");
 
                 if (await _context.Users.AnyAsync(x => x.UserName == request.RegisterCredentials.UserName))
-                    return Result<User>.BadRequest("Username already exists");
+                    return Result<User>.Failure("Username already exists");
 
 
                 var user = new AppUser
