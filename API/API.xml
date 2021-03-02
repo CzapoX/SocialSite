@@ -53,5 +53,11 @@
             <param name="registerCredentials"></param>
             <returns></returns>
         </member>
+        <member name="M:API.Controllers.UserController.GetCurrentUser">
+            <summary>
+            Returns loged in user
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

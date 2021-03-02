@@ -1,4 +1,5 @@
 ﻿using Application.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -26,6 +27,17 @@ namespace API.Controllers
         public async Task<ActionResult<User>> Register(UserRegisterDto registerCredentials)
         {
             return HandleResult(await Mediator.Send(new Register.Command { RegisterCredentials = registerCredentials }));
+        }
+
+        /// <summary>
+        /// Returns loged in user
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<User>> GetCurrentUser()
+        {
+            return HandleResult(await Mediator.Send(new GetCurrentUser.Query()));
         }
     }
 }
