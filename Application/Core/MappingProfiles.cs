@@ -1,14 +1,15 @@
 ﻿using Application.Posts;
-using AutoMapper;
 using Domain;
 
 namespace Application.Core
 {
-    public class MappingProfiles : Profile
+    public class MappingProfiles : AutoMapper.Profile
     {
         public MappingProfiles()
         {
             CreateMap<PostCreateOrEditDto, Post>();
+            CreateMap<Post, PostDto>();
+            CreateMap<AppUser, Profiles.Profile>();
         }
     }
 }
