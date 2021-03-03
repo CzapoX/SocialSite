@@ -1,4 +1,5 @@
 ﻿using Application.Core;
+using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
@@ -29,18 +30,21 @@ namespace Application.Posts
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
+            private readonly IUserAccessor _userAccessor;
 
-            public Handler(DataContext context, IMapper mapper)
+            public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
             {
                 _context = context;
                 _mapper = mapper;
+                _userAccessor = userAccessor;
             }
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 Post postToCreate = _mapper.Map<Post>(request.Post);
                 postToCreate.CreateDate = DateTime.Now;
-                
+                postToCreate.PostOwnerId = _userAccessor.GetCurrentUserId();
+
                 await _context.Posts.AddAsync(postToCreate);
                 var result = await _context.SaveChangesAsync() > 0;
 

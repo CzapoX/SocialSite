@@ -1,7 +1,9 @@
 ﻿using Application.Core;
+using Application.Interfaces;
 using Application.Posts;
 using AutoMapper;
 using Domain;
+using Moq;
 using System;
 using System.Linq;
 using System.Threading;
@@ -13,18 +15,20 @@ namespace Tests.Posts
     public class CreateTest : BaseTest
     {
         private readonly IMapper _mapper;
+        private readonly Mock<IUserAccessor> _userAcessor;
 
         public CreateTest()
         {
             var mockMapper = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfiles()); });
             _mapper = mockMapper.CreateMapper();
+            _userAcessor = new Mock<IUserAccessor>();
         }
 
         [Fact]
         public async Task ShouldCreateActivity()
         {
             var context = GetDataContext();
-            var sut = new Create.Handler(context, _mapper);
+            var sut = new Create.Handler(context, _mapper, _userAcessor.Object);
             var postToCreate = new PostCreateOrEditDto
             {
                 Category = "Animal",
