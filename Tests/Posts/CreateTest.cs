@@ -1,8 +1,5 @@
-﻿using Application.Core;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Application.Posts;
-using AutoMapper;
-using Domain;
 using Moq;
 using System;
 using System.Linq;

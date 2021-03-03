@@ -1,6 +1,4 @@
-﻿using Application.Core;
-using Application.Posts;
-using AutoMapper;
+﻿using Application.Posts;
 using Domain;
 using System;
 using System.Threading;
