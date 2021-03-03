@@ -49,6 +49,7 @@ namespace Persistence
             {
                 new Post
                 {
+                    Id = Guid.Parse("330ee2cd-f1dd-40b8-807d-08d8d725d360"),
                     Title = "Dog",
                     CreateDate = DateTime.Now.AddMonths(-2),
                     Description ="The domestic dog (Canis familiaris when considered a separate species or Canis lupus familiaris when considered a subspecies of the wolf) is a wolf-like canid that can be found distributed around the world." +
@@ -63,6 +64,7 @@ namespace Persistence
 
                 new Post
                 {
+                    Id = Guid.Parse("EC10C5B2-3CE3-4A9D-3248-08D8DE349543"),
                     Title = "Cat",
                     CreateDate = DateTime.Now.AddDays(-1),
                     Description = "The cat (Felis catus) is a domestic species of small carnivorous mammal." +

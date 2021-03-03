@@ -55,7 +55,7 @@ namespace API.Controllers
         /// <summary>
         /// Deletes a post with selected id
         /// </summary>
-        /// <param name="id" example="330EE2CD-F1DD-40B8-807D-08D8D725D360">Post ID</param>
+        /// <param name="id" example="EC10C5B2-3CE3-4A9D-3248-08D8DE349543">Post ID</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(Guid id)
