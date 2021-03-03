@@ -10,5 +10,7 @@ namespace Domain
         public DateTime EditDate { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
+        public string PostOwnerId { get; set; }
+        public AppUser PostOwner { get; set; }
     }
 }
