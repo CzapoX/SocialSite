@@ -11,14 +11,10 @@ namespace Tests.Posts
 {
     public class EditTest : BaseTest
     {
-        private readonly IMapper _mapper;
         private readonly Guid id;
 
         public EditTest()
         {
-            var mockMapper = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfiles()); });
-            _mapper = mockMapper.CreateMapper();
-
             id = new Guid("1fbf9f1d-9f35-483d-bcfc-7acbd63c134c");
         }
 

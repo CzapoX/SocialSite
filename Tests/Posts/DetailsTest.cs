@@ -30,19 +30,28 @@ namespace Tests.Posts
                 Title = "First Post",
                 Description = "Desc",
                 Category = "cat",
-                CreateDate = DateTime.Today
+                CreateDate = DateTime.Today,
+                PostOwner = new AppUser { UserName = "Norbert", Bio = "Bio"}
             };
+
+            var expectedPost = _mapper.Map<PostDto>(postToFind);
 
             await context.Posts.AddAsync(postToFind);
             await context.Posts.AddAsync(new Post { Id = secondId, Title = "Second Post" });
             await context.SaveChangesAsync();
 
-            var sut = new Details.Handler(context);
+            var sut = new Details.Handler(context, _mapper);
 
             var result = sut.Handle(new Details.Query { Id = firstId }, CancellationToken.None).Result.Value;
 
             Assert.NotNull(result);
-            Assert.Equal(result, postToFind);
+            Assert.NotNull(result.PostOwner);
+            Assert.Equal(result.Category, expectedPost.Category);
+            Assert.Equal(result.Title, expectedPost.Title);
+            Assert.Equal(result.CreateDate, expectedPost.CreateDate);
+            Assert.Equal(result.Description, expectedPost.Description);
+            Assert.Equal(result.PostOwner.Bio, expectedPost.PostOwner.Bio);
+            Assert.Equal(result.PostOwner.Username, expectedPost.PostOwner.Username);
         }
     }
 }

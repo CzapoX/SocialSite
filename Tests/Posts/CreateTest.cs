@@ -14,13 +14,10 @@ namespace Tests.Posts
 {
     public class CreateTest : BaseTest
     {
-        private readonly IMapper _mapper;
         private readonly Mock<IUserAccessor> _userAcessor;
 
         public CreateTest()
         {
-            var mockMapper = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfiles()); });
-            _mapper = mockMapper.CreateMapper();
             _userAcessor = new Mock<IUserAccessor>();
         }
 
