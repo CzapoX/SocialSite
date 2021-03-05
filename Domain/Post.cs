@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -12,5 +13,6 @@ namespace Domain
         public string Category { get; set; }
         public string PostOwnerId { get; set; }
         public AppUser PostOwner { get; set; }
+        public ICollection<PostLiker> PostLikers { get; set; }
     }
 }

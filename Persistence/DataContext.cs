@@ -11,5 +11,23 @@ namespace Persistence
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<PostLiker> PostLikers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<PostLiker>(x => x.HasKey(a => new { a.AppUserId, a.PostId }));
+            
+            builder.Entity<PostLiker>()
+                .HasOne(x => x.AppUser)
+                .WithMany(x => x.PostsLiked)
+                .HasForeignKey(x => x.AppUserId);
+
+            builder.Entity<PostLiker>()
+               .HasOne(x => x.Post)
+               .WithMany(x => x.PostLikers)
+               .HasForeignKey(x => x.PostId);
+        }
     }
 }

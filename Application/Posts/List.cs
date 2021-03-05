@@ -26,7 +26,10 @@ namespace Application.Posts
 
             public async Task<Result<List<PostDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var posts = await _context.Posts.Include(x => x.PostOwner).ToListAsync();
+                var posts = await _context.Posts
+                    .Include(x => x.PostOwner)
+                    .Include(x => x.PostLikers).ThenInclude(x => x.AppUser)
+                    .ToListAsync();
 
                 List<PostDto> postsDtos = new List<PostDto>();
 
