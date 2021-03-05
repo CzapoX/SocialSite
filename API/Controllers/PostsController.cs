@@ -65,5 +65,16 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
         }
+
+        /// <summary>
+        /// Like and Unlikes a post with selected id
+        /// </summary>
+        /// <param name="id" example="330EE2CD-F1DD-40B8-807D-08D8D725D360"></param>
+        /// <returns></returns>
+        [HttpPost("{id}/like")]
+        public async Task<IActionResult> LikePost(Guid id)
+        {
+           return HandleResult(await Mediator.Send(new Like.Command { Id = id }));
+        }
     }
 }
