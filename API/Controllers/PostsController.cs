@@ -2,6 +2,7 @@
 using Application.Posts;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -46,6 +47,7 @@ namespace API.Controllers
         /// <param name="editPost">Edited post</param>
         /// <returns></returns>
         [HttpPost("{id}")]
+        [Authorize(Policy = "IsPostOwner")]
         public async Task<IActionResult> EditPost(Guid id, PostCreateOrEditDto editPost)
         {
             editPost.Id = id;
@@ -58,6 +60,7 @@ namespace API.Controllers
         /// <param name="id" example="EC10C5B2-3CE3-4A9D-3248-08D8DE349543">Post ID</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [Authorize(Policy = "IsPostOwner")]
         public async Task<IActionResult> DeletePost(Guid id)
         {
             return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));

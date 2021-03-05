@@ -110,6 +110,16 @@ namespace API
                         ValidateAudience = false
                     };
                 });
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("IsPostOwner", policy =>
+                {
+                    policy.Requirements.Add(new IsHostRequirment());
+                });
+            });
+
+            services.AddTransient<IAuthorizationHandler, IsHostRequirmentHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
