@@ -124,6 +124,53 @@ namespace Persistence
             };
 
             await dataContext.Posts.AddRangeAsync(posts);
+
+            var postLikers = new List<PostLiker>
+            {
+                new PostLiker
+                {
+                    PostId = posts[0].Id,
+                    AppUserId = usersFromDb[0].Id
+                },
+
+                new PostLiker
+                {
+                    PostId = posts[0].Id,
+                    AppUserId = usersFromDb[1].Id
+                },
+
+                new PostLiker
+                {
+                    PostId = posts[2].Id,
+                    AppUserId = usersFromDb[1].Id
+                },
+
+                new PostLiker
+                {
+                    PostId = posts[2].Id,
+                    AppUserId = usersFromDb[2].Id
+                },
+
+                new PostLiker
+                {
+                    PostId = posts[3].Id,
+                    AppUserId = usersFromDb[0].Id
+                },
+
+                new PostLiker
+                {
+                    PostId = posts[5].Id,
+                    AppUserId = usersFromDb[2].Id
+                },
+
+                new PostLiker
+                {
+                    PostId = posts[6].Id,
+                    AppUserId = usersFromDb[1].Id
+                },
+            };
+
+            await dataContext.PostLikers.AddRangeAsync(postLikers);
             await dataContext.SaveChangesAsync();
         }
     }
