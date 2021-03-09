@@ -1,6 +1,5 @@
 ﻿using Application.Photos;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -23,14 +22,14 @@ namespace API.Controllers
         /// <summary>
         /// Adds photo to post
         /// </summary>
-        /// <param name="id" example="330EE2CD-F1DD-40B8-807D-08D8D725D360"></param>
+        /// <param name="postId" example="330EE2CD-F1DD-40B8-807D-08D8D725D360"></param>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost("{id}")]
+        [HttpPost("{postId}")]
         [Authorize(Policy = "IsPostOwner")]
-        public async Task<IActionResult> AddToPost(Guid id, [FromForm] AddForPost.Command command)
+        public async Task<IActionResult> AddToPost(Guid postId, [FromForm] AddForPost.Command command)
         {
-            command.PostId = id;
+            command.PostId = postId;
             return HandleResult(await Mediator.Send(command));
         }
 

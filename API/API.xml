@@ -15,7 +15,7 @@
             <summary>
             Adds photo to post
             </summary>
-            <param name="id" example="330EE2CD-F1DD-40B8-807D-08D8D725D360"></param>
+            <param name="postId" example="330EE2CD-F1DD-40B8-807D-08D8D725D360"></param>
             <param name="command"></param>
             <returns></returns>
         </member>
