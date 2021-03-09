@@ -12,5 +12,6 @@ The application is developed using CQRS + Mediator pattern with Clean Architectu
 * MediatR
 * FluentValidation
 * AutoMapper
+* Azure Storage
 * XUnit
 * Moq
