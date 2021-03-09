@@ -6,7 +6,7 @@
     <members>
         <member name="M:API.Controllers.PhotosController.AddToUser(Application.Photos.AddForUser.Command)">
             <summary>
-            Adds photo for logged in user, if user already have photo method returns BadRequest
+            Adds photo for logged in user profile
             </summary>
             <param name="command"></param>
             <returns></returns>
@@ -17,6 +17,13 @@
             </summary>
             <param name="id" example="330EE2CD-F1DD-40B8-807D-08D8D725D360"></param>
             <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.PhotosController.DeletePhoto(System.Guid)">
+            <summary>
+            Delete existing photo if it isn't main photo
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:API.Controllers.PostsController.GetPosts">

@@ -10,7 +10,7 @@ namespace API.Controllers
     public class PhotosController : BaseApiController
     {
         /// <summary>
-        /// Adds photo for logged in user, if user already have photo method returns BadRequest
+        /// Adds photo for logged in user profile
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
@@ -32,6 +32,17 @@ namespace API.Controllers
         {
             command.PostId = id;
             return HandleResult(await Mediator.Send(command));
+        }
+
+        /// <summary>
+        /// Delete existing photo if it isn't main photo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
         }
     }
 }

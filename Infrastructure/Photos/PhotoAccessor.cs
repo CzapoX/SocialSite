@@ -29,7 +29,7 @@ namespace Infrastructure.Photos
                 var client = await GetContainerClient();
 
                 var id = Guid.NewGuid();
-                var fileName = id.ToString() + photo.ContentType;
+                var fileName = id.ToString();
 
                 BlobClient blobClient = client.GetBlobClient(fileName);
 
@@ -69,12 +69,12 @@ namespace Infrastructure.Photos
             return containerClient;
         }
 
-        public async Task<string> DeletePhoto(string fileName)
+        public async Task<bool> DeletePhoto(string photoId)
         {
             var client = await GetContainerClient();
-            BlobClient blobClient = client.GetBlobClient(fileName);
+            BlobClient blobClient = client.GetBlobClient(photoId);
             var result = await blobClient.DeleteIfExistsAsync();
-            return result.GetRawResponse().Status == 200 ? "ok" : "error";
+            return result.Value;
         }
     }
 }
