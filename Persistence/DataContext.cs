@@ -10,6 +10,7 @@ namespace Persistence
         {
         }
 
+        public DbSet<Photo> Photos { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostLiker> PostLikers { get; set; }
 

@@ -4,6 +4,21 @@
         <name>API</name>
     </assembly>
     <members>
+        <member name="M:API.Controllers.PhotosController.AddToUser(Application.Photos.AddForUser.Command)">
+            <summary>
+            Adds photo for logged in user, if user already have photo method returns BadRequest
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.PhotosController.AddToPost(System.Guid,Application.Photos.AddForPost.Command)">
+            <summary>
+            Adds photo to post
+            </summary>
+            <param name="id" example="330EE2CD-F1DD-40B8-807D-08D8D725D360"></param>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
         <member name="M:API.Controllers.PostsController.GetPosts">
             <summary>
             Fetches list of posts
