@@ -48,7 +48,7 @@ namespace Application.User
             {
                 var user = await _userManager.Users
                     .Include(x => x.Photos)
-                    .FirstOrDefaultAsync(x => x.Email == request.loginCredentials.Email);
+                    .SingleOrDefaultAsync(x => x.Email == request.loginCredentials.Email);
 
                 if (user == null)
                     return Result<User>.Unauthorized($"Invalid email: {request.loginCredentials.Email}");
