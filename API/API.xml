@@ -26,6 +26,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:API.Controllers.PhotosController.SetMain(System.Guid)">
+            <summary>
+            Sets user's photo as main
+            </summary>
+            <param name="photoId"></param>
+            <returns></returns>
+        </member>
         <member name="M:API.Controllers.PostsController.GetPosts">
             <summary>
             Fetches list of posts
