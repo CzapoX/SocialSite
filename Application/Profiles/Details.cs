@@ -37,7 +37,7 @@ namespace Application.Profiles
                 
                 var user = await _context.Users
                     .Include(x => x.Photos)
-                    .FirstOrDefaultAsync(x => x.NormalizedUserName == username);
+                    .SingleOrDefaultAsync(x => x.NormalizedUserName == username);
 
                 if (user == null)
                     return null;
