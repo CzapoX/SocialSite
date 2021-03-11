@@ -75,6 +75,13 @@
             <param name="id" example="330EE2CD-F1DD-40B8-807D-08D8D725D360"></param>
             <returns></returns>
         </member>
+        <member name="M:API.Controllers.ProfilesController.GetProfile(System.String)">
+            <summary>
+            Fetches a single profile by username
+            </summary>
+            <param name="username" example="Norbert"></param>
+            <returns></returns>
+        </member>
         <member name="M:API.Controllers.UserController.Login(Application.User.UserLoginDto)">
             <summary>
             Logs in existing user
