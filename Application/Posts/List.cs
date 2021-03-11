@@ -28,7 +28,7 @@ namespace Application.Posts
             {
                 var posts = await _context.Posts
                     .Include(x => x.PostOwner)
-                    .Include(x => x.PostLikers).ThenInclude(x => x.AppUser)
+                    .Include(x => x.PostLikers).ThenInclude(x => x.AppUser).ThenInclude(x => x.Photos).AsSplitQuery()
                     .ToListAsync();
 
                 List<PostDto> postsDtos = new List<PostDto>();

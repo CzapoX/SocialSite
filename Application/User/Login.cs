@@ -4,6 +4,8 @@ using Domain;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -44,7 +46,9 @@ namespace Application.User
 
             public async Task<Result<User>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var user = await _userManager.FindByEmailAsync(request.loginCredentials.Email);
+                var user = await _userManager.Users
+                    .Include(x => x.Photos)
+                    .FirstOrDefaultAsync(x => x.Email == request.loginCredentials.Email);
 
                 if (user == null)
                     return Result<User>.Unauthorized($"Invalid email: {request.loginCredentials.Email}");
@@ -57,6 +61,7 @@ namespace Application.User
                     {
                         Token = _tokenService.CreateToken(user),
                         Username = user.UserName,
+                        Image = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
                     };
 
                     return Result<User>.Success(appUser);

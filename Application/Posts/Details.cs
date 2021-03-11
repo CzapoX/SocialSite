@@ -30,9 +30,9 @@ namespace Application.Posts
             public async Task<Result<PostDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var post = await _context.Posts
-                    .Include(x=>x.PostOwner)
-                    .Include(x => x.PostLikers).ThenInclude(x => x.AppUser)
-                    .FirstOrDefaultAsync(x=>x.Id == request.Id);       
+                    .Include(x => x.PostOwner)
+                    .Include(x => x.PostLikers).ThenInclude(x => x.AppUser).ThenInclude(x => x.Photos).AsSplitQuery()
+                    .FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 return Result<PostDto>.Success(_mapper.Map<PostDto>(post));
             }

@@ -29,6 +29,11 @@
             User token
             </summary>
         </member>
+        <member name="P:Application.User.User.Image">
+            <summary>
+            User's main image url
+            </summary>
+        </member>
         <member name="P:Application.User.UserLoginDto.Email">
              <summary>
              User email

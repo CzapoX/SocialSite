@@ -3,6 +3,8 @@ using Application.Interfaces;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,14 +29,21 @@ namespace Application.User
 
             public async Task<Result<User>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var user = await _userManager.FindByIdAsync(_userAccessor.GetCurrentUserId());
+                var user = await _userManager.Users
+                    .Include(x => x.Photos)
+                    .FirstOrDefaultAsync(x => x.Id == _userAccessor.GetCurrentUserId());
 
-                if(user == null)
+                if (user == null)
                 {
                     return null;
                 }
 
-                return Result<User>.Success(new User { Username = user.UserName, Token = _tokenService.CreateToken(user) });
+                return Result<User>.Success(new User
+                {
+                    Username = user.UserName,
+                    Token = _tokenService.CreateToken(user),
+                    Image = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
+                });
             }
         }
 

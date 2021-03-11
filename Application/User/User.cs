@@ -11,5 +11,10 @@
         /// User token
         /// </summary>
         public string Token { get; set; }
+
+        /// <summary>
+        /// User's main image url
+        /// </summary>
+        public string Image { get; set; }
     }
 }
