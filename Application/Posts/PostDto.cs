@@ -11,7 +11,7 @@ namespace Application.Posts
         public DateTime EditDate { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
-        public Profile PostOwner { get; set; }
-        public List<Profile> PostLikers { get; set; }
+        public PostLikerDto PostOwner { get; set; }
+        public List<PostLikerDto> PostLikers { get; set; }
     }
 }

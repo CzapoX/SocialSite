@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,6 +33,7 @@ namespace Application.Posts
                 var post = await _context.Posts
                     .Include(x => x.PostOwner)
                     .Include(x => x.PostLikers).ThenInclude(x => x.AppUser).ThenInclude(x => x.Photos).AsSplitQuery()
+                    .OrderBy(x => x.Id)
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 return Result<PostDto>.Success(_mapper.Map<PostDto>(post));
