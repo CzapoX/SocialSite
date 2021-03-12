@@ -42,7 +42,7 @@ namespace Application.Posts
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 Post postToCreate = _mapper.Map<Post>(request.Post);
-                postToCreate.CreateDate = DateTime.Now;
+                postToCreate.CreateDate = DateTime.UtcNow;
                 postToCreate.PostOwnerId = _userAccessor.GetCurrentUserId();
 
                 await _context.Posts.AddAsync(postToCreate);

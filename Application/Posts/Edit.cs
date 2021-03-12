@@ -39,7 +39,7 @@ namespace Application.Posts
                 var postToEdit =  await _context.Posts.FindAsync(request.Post.Id);
                 if (postToEdit == null) return null;
                 _mapper.Map(request.Post, postToEdit);
-                postToEdit.EditDate = DateTime.Now;
+                postToEdit.EditDate = DateTime.UtcNow;
 
                 var result = await _context.SaveChangesAsync() > 0;
 
