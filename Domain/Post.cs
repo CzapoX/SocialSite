@@ -15,5 +15,6 @@ namespace Domain
         public AppUser PostOwner { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<PostLiker> PostLikers { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

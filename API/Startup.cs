@@ -1,3 +1,4 @@
+using API.SignalR;
 using Application.Core;
 using Application.Interfaces;
 using Application.Posts;
@@ -23,6 +24,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace API
 {
@@ -52,6 +54,7 @@ namespace API
 
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles));
+            services.AddSignalR();
 
             services.AddIdentityCore<AppUser>()
                 .AddEntityFrameworkStores<DataContext>()
@@ -111,6 +114,19 @@ namespace API
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
+                    opt.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            var accessToken = context.Request.Query["access_token"];
+                            var path = context.HttpContext.Request.Path;
+                            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/chat"))
+                            {
+                                context.Token = accessToken;
+                            }
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
 
             services.AddAuthorization(opt =>
@@ -144,6 +160,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<CommentHub>("/comments");
             });
         }
     }
