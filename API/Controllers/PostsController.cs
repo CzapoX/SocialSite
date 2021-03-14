@@ -3,19 +3,21 @@ using Application.Posts;
 using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Application.Core;
 
 namespace API.Controllers
 {
     public class PostsController : BaseApiController
     {
         /// <summary>
-        /// Fetches list of posts
+        /// Fetches list of posts as paginated list
         /// </summary>
+        /// <param name="param"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetPosts()
+        public async Task<IActionResult> GetPosts([FromQuery] PagingParams param)
         {
-            return HandleResult(await Mediator.Send(new List.Query()));
+            return HandleResult(await Mediator.Send(new List.Query { Params = param }));
         }
 
         /// <summary>
@@ -74,7 +76,7 @@ namespace API.Controllers
         [HttpPost("{id}/like")]
         public async Task<IActionResult> LikePost(Guid id)
         {
-           return HandleResult(await Mediator.Send(new Like.Command { Id = id }));
+            return HandleResult(await Mediator.Send(new Like.Command { Id = id }));
         }
     }
 }

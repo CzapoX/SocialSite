@@ -33,10 +33,11 @@
             <param name="photoId"></param>
             <returns></returns>
         </member>
-        <member name="M:API.Controllers.PostsController.GetPosts">
+        <member name="M:API.Controllers.PostsController.GetPosts(Application.Core.PagingParams)">
             <summary>
-            Fetches list of posts
+            Fetches list of posts as paginated list
             </summary>
+            <param name="param"></param>
             <returns></returns>
         </member>
         <member name="M:API.Controllers.PostsController.GetPost(System.Guid)">

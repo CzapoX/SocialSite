@@ -1,4 +1,5 @@
-﻿using Application.Posts;
+﻿using Application.Core;
+using Application.Posts;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -15,6 +16,7 @@ namespace Tests.Posts
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase("TestListDatabase").Options;
             var context = new DataContext(options);
+            var param = new PagingParams();
 
             var postOwnerName = "Norbert";
             context.Posts.Add(new Post { Title = "Post 1", PostOwner = new AppUser {UserName = postOwnerName } });
@@ -22,7 +24,7 @@ namespace Tests.Posts
             context.SaveChanges();
 
             var sut = new List.Handler(context, _mapper);
-            var result = sut.Handle(new List.Query(), CancellationToken.None).Result.Value;
+            var result = sut.Handle(new List.Query { Params = param }, CancellationToken.None).Result.Value;
 
             Assert.NotNull(result);
             Assert.Equal(2, result.Count);
