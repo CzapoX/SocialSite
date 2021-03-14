@@ -15,3 +15,4 @@ The application is developed using CQRS + Mediator pattern with Clean Architectu
 * Azure Storage
 * XUnit
 * Moq
+* SignalR
