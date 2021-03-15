@@ -35,10 +35,13 @@ namespace Application.Comments
                 var comments = await _context.Comments
                     .Where(x => x.PostId == request.PostId)
                     .OrderBy(x => x.CreateDate)
-                    .ProjectTo<CommentDto>(_mapper.ConfigurationProvider)
                     .ToListAsync();
+                
+                var commentsDtos = new List<CommentDto>();
+                foreach (var comment in comments)
+                    commentsDtos.Add(_mapper.Map<CommentDto>(comment));
 
-                return Result<List<CommentDto>>.Success(comments);
+                return Result<List<CommentDto>>.Success(commentsDtos);
             }
         }
     }
