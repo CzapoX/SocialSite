@@ -1,4 +1,5 @@
-﻿using Application.Posts;
+﻿using Application.Comments;
+using Application.Posts;
 using Domain;
 using System.Linq;
 
@@ -18,7 +19,7 @@ namespace Application.Core
                 .ForMember(x => x.Username, f => f.MapFrom(f => f.AppUser.UserName))
                 .ForMember(x => x.Bio, f => f.MapFrom(f => f.AppUser.Bio))
                 .ForMember(x => x.Image, f => f.MapFrom(f => f.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url));
-            CreateMap<Post, PostDto>();
+            CreateMap<Comment, CommentDto>();
         }
     }
 }

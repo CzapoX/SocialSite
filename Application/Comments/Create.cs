@@ -65,7 +65,7 @@ namespace Application.Comments
                 var result = await _context.SaveChangesAsync() > 0;
 
                 if (result)
-                    Result<CommentDto>.Success(_mapper.Map<CommentDto>(comment));
+                    return Result<CommentDto>.Success(_mapper.Map<CommentDto>(comment));
 
                 return Result<CommentDto>.Failure("Error adding comment");
             }
