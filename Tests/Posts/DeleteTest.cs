@@ -11,7 +11,7 @@ namespace Tests.Posts
     public class DeleteTest : BaseTest
     {
         [Fact]
-        public async Task ShouldDeleteActivity()
+        public async Task ShouldDeletePost()
         {
             var context = GetDataContext();
             var sut = new Delete.Handler(context);

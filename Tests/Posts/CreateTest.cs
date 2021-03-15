@@ -19,7 +19,7 @@ namespace Tests.Posts
         }
 
         [Fact]
-        public async Task ShouldCreateActivity()
+        public async Task ShouldCreatePost()
         {
             var context = GetDataContext();
             var sut = new Create.Handler(context, _mapper, _userAcessor.Object);

@@ -11,7 +11,7 @@ namespace Tests.Posts
     public class ListTest : BaseTest
     {
         [Fact]
-        public void ShouldReturnListOfActivity()
+        public void ShouldReturnListOfPosts()
         {
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase("TestListDatabase").Options;
